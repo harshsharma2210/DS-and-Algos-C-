@@ -5,10 +5,10 @@
 using namespace std;
 int main()
 {
-	int n,m,k,i,j;
+	int n,m,k=0,i,j;
 	cout<<"Enter the size of the matrix\n";
 	cin>>n;
-	m = n*(n+1)/2+1;
+	m = n*(n+1)/2;
 	int a[m];
 	cout<<"Enter the elements\n";
 	for(i=0;i<m;i++)

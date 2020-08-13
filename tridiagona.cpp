@@ -1,28 +1,28 @@
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
-int main() {
-	long long int k;
-	cin>>k;
-	if(k%2!=0)
+int main()
+{
+	int i, j, k=0, size, a[100];
+	 cout<<"Enter Size of Matrix\n";
+    cin>>size;	
+	int l=size*3-2;
+	cout<<"\nEnter elements\n";
+	for (i = 0; i < l; i++)
+		cin>>a[i];
+	cout<<"\nThe matrix is...\n";
+	for (i = 0; i < size; i++)
 	{
-		long long int m,n;
-		m=(k+1)/2;
-		n=(k-1)/2;
-		if((m*m+n*n)<(2*m*n+m*m-n*n))
-		cout<<2*m*n<<" "<<(m*m+n*n);
-		else 
-		cout<<"-1";
-	}
-	else
-	{
-		long long int m,n;
-		m=k/2;
-		n=1;
-		if((m*m+n*n)<(2*m*n+m*m-n*n))
-		cout<<(m*m-n*n)<<" "<<(m*m+n*n);
-		else
-		cout<<"-1";
-
+		for (j = 0; j < size; j++)
+		{
+			if (i-j == -1 || i-j == 0 || i-j == 1)
+			{
+				cout<<a[k]<<" "; 
+				k++;
+			}
+			else
+				cout<<"0 ";
+		}
+		cout<<"\n";
 	}
 	return 0;
 }
