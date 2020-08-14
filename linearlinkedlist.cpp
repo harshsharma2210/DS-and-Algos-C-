@@ -93,7 +93,7 @@ void insertMid()
     cout << "Enter the position \n";
     cin >> pos;
     nodectr = countnode(start);
-    if (pos > 1 && pos < nodectr)
+    if (pos >= 1 && pos < nodectr)
     {
         temp = prev = start;
         while (ctr < pos)
@@ -117,11 +117,100 @@ void insertEnd()
     else
     {
         temp = start;
-        while (temp != NULL)
+        while (temp->next != NULL)
         {
             temp = temp->next;
         }
         temp->next = newnode;
+    }
+}
+void delBeg()
+{
+    Node *temp;
+    if (start == NULL)
+    {
+        cout << "No nodes exit/n";
+        return;
+    }
+    else
+    {
+        temp = start;
+        start = temp->next;
+        free(temp);
+        cout << "Node delete\n";
+    }
+}
+void delMid()
+{
+
+    Node *prev, *temp;
+    temp = start;
+    int ctr = 1, pos, nodectr;
+    if (start == NULL)
+    {
+        cout << "Empty List\n";
+        return;
+    }
+    else
+    {
+        cout << "Enter position of node to delete\n";
+        cin >> pos;
+        nodectr = countnode(start);
+        if (pos > nodectr)
+        {
+            cout << "This node does not exist\n";
+        }
+        if (pos >= 1 && pos < nodectr)
+        {
+            temp = prev = start;
+            while (ctr < pos)
+            {
+                prev = temp;
+                temp = temp->next;
+                ctr++;
+            }
+            prev->next = temp->next;
+            free(temp);
+            cout << "Node Deleted Successfully\n";
+        }
+        else{
+            cout<<"Invalid Position\n";
+        }
+    }
+}
+void delEnd()
+{
+    Node *temp, *prev;
+    if (start == NULL)
+    {
+        cout << "Empty List";
+        return;
+    }
+    else
+    {
+        temp = start;
+        prev = start;
+        while (temp->next != NULL)
+        {
+            prev = temp;
+            temp = temp->next;
+        }
+        prev->next = NULL;
+        free(temp);
+        cout << "Node Deleted\n";
+    }
+}
+int reverseTraverse(Node *ptr)
+{
+    if (ptr == NULL)
+    {
+        return 0;
+    }
+    else
+    {
+
+        reverseTraverse(start->next);
+        cout<<start->data<<"\n";
     }
 }
 int main()
@@ -135,6 +224,11 @@ int main()
         cout << "Enter 3 for Inserting the node at beginning of the List\n";
         cout << "Enter 4 for Inserting the node at middle of the List\n";
         cout << "Enter 5 for Inserting the node at end of the List\n";
+        cout << "Enter 6 for Deleting the node at beginning of the List\n";
+        cout << "Enter 7 for Deleting the node at middle of the List\n";
+        cout << "Enter 8 for Deleting the node at end of the List\n";
+        cout << "Enter 9 for Displaying node from right to left\n";
+        cout << "Enter 10 for Displaying no of elements\n";
         cout << "Enter choice\n";
         cin >> c;
         switch (c)
@@ -156,6 +250,23 @@ int main()
             break;
         case 5:
             insertEnd();
+            break;
+        case 6:
+            delBeg();
+            break;
+        case 7:
+            delMid();
+            break;
+        case 8:
+            delEnd();
+            break;
+
+        case 9:
+            cout << "The content from Right to Left= " << reverseTraverse(start);
+            break;
+
+        case 10:
+            cout << "No of nodes= " << countnode(start);
             break;
         default:
             break;

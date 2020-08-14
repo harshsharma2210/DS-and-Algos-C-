@@ -1,5 +1,5 @@
 
-// Upper Triangular
+// Symmetric
 
 #include<iostream>
 using namespace std;
@@ -8,7 +8,7 @@ int main()
 	int n,m,k,i,j;
 	cout<<"Enter the size of the matrix\n";
 	cin>>n;
-	m = n*(n+1)/2+1;
+	m = n*(n+1)/2;
 	int a[m];
 	cout<<"Enter the elements\n";
 	for(i=0;i<m;i++)
@@ -17,15 +17,11 @@ int main()
 	{
 		for(j=0;j<n;j++)
 		{
-			if(i<=j)
-			{
-				cout<<a[k]<<" ";
-				k++;
-				
-			}
-			else
-			cout<<"0"<<" ";
 		}
 		cout<<endl;
 	}
 }
+
+// 7 2 3
+// 2 8 4
+// 3 4 9
