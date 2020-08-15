@@ -24,7 +24,7 @@ void createList(int n)
 {
     Node *newnode;
     Node *temp;
-    nodectr=n;
+    nodectr = n;
     for (int i = 0; i < n; i++)
     {
         newnode = getNode();
@@ -40,7 +40,7 @@ void createList(int n)
             temp->next = newnode;
         }
     }
-    newnode->next=start;
+    newnode->next = start;
 }
 
 void traverse()
@@ -59,24 +59,34 @@ void traverse()
         {
             cout << temp->data << " ";
             temp = temp->next;
-        }while(temp!=start);
+        } while (temp != start);
         cout << "\n";
     }
 }
 
 void insertBeg()
 {
-    Node *newnode;
+    Node *newnode, *last;
     newnode = getNode();
     if (start == NULL)
     {
         start = newnode;
+        newnode->next = start;
     }
     else
     {
+        last = start;
+        while (last->next != start)
+        {
+            last = last->next;
+        }
+
         newnode->next = start;
         start = newnode;
+        last->next = start;
     }
+    cout << "Node Inserted At beginning\n";
+    nodectr++;
 }
 
 void insertMid()
@@ -106,7 +116,10 @@ void insertEnd()
     newnode = getNode();
 
     if (start == NULL)
+    {
         start = newnode;
+        newnode->next = start;
+    }
     else
     {
         temp = start;
@@ -115,7 +128,10 @@ void insertEnd()
             temp = temp->next;
         }
         temp->next = newnode;
+        newnode->next=start;
     }
+    cout<<"Node Inserted AT END..\n";
+    nodectr++;
 }
 void delBeg()
 {
