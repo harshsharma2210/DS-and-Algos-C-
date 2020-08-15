@@ -146,7 +146,7 @@ void insertMid()
     }
     else
     {
-        cout << "Position is Invalid.\n"
+        cout << "Position is Invalid.\n";
     }
 }
 void delBeg()
@@ -176,7 +176,7 @@ void delMid()
     {
         cout << "Enter the position of the node to delete";
         cin >> pos;
-        nodectr = countnode();
+        nodectr = countnode(start);
         if (pos > nodectr)
         {
             cout << "This node does not exist\n";
