@@ -165,6 +165,40 @@ void delBeg()
 }
 void delMid()
 {
+    int i = 0, pos, nodectr;
+    Node *temp;
+    if (start == NULL)
+    {
+        cout << "Empty list\n";
+        return;
+    }
+    else
+    {
+        cout << "Enter the position of the node to delete";
+        cin >> pos;
+        nodectr = countnode();
+        if (pos > nodectr)
+        {
+            cout << "This node does not exist\n";
+        }
+        if(pos>1 && pos<nodectr)
+        {
+            temp = start;
+            i = 1;
+            while (i < pos)
+            {
+                temp=temp->right;
+                i++;
+            }
+            temp->right->left=temp->left;
+            temp->left->right=temp->right;
+            free(temp);
+            cout<<"node deleted\n";
+        }
+        else{
+            cout<<"It is not a middle position\n";
+        }
+    }
 }
 void delEnd()
 {
@@ -179,11 +213,11 @@ void delEnd()
         temp = start;
         while (temp->right != NULL)
         {
-            temp=temp->right;
+            temp = temp->right;
         }
-        temp->left->right=NULL;
+        temp->left->right = NULL;
         free(temp);
-        
+        temp = NULL;
     }
 }
 
