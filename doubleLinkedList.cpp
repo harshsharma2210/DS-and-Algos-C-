@@ -13,7 +13,8 @@ Node *start = NULL;
 Node *getNode()
 {
     Node *newnode;
-    cout << "Enter Data\n";
+    newnode = new Node;
+    cout << "Enter Data \n";
     cin >> newnode->data;
     newnode->left = NULL;
     newnode->right = NULL;
@@ -23,13 +24,166 @@ Node *getNode()
 void createList(int n)
 {
     int i;
-    Node *newnode;
+    Node *newnode, *temp;
     for (i = 0; i < n; i++)
     {
-        newnode=getNode();
-        if(start==NULL)
-            start=newnode;
+        newnode = getNode();
+        if (start == NULL)
+            start = newnode;
+        else
+        {
+            temp = start;
+            while (temp->right)
+                temp = temp->right;
+            temp->right = newnode;
+            newnode->left = temp;
+        }
+    }
+}
+void traverse()
+{
+    Node *temp;
+    temp = start;
+    cout << "The content of the list are= ";
+    if (start == NULL)
+        cout << "Empty List\n";
+    else
+    {
 
+        while (temp != NULL)
+        {
+            cout << temp->data;
+            temp = temp->right;
+        }
+    }
+}
+void reverseTraverse()
+{
+    Node *temp;
+    temp = start;
+    cout << "Content of list from Right to Left is: ";
+    if (start == NULL)
+    {
+        cout << "Empty List";
+    }
+    else
+    {
+        while (temp->right != NULL)
+            temp = temp->right;
+        while (temp != NULL)
+        {
+            cout << temp->data << " ";
+            temp = temp->left;
+        }
+        cout << "\n";
+    }
+}
+int countnode(Node *start)
+{
+    if (start == NULL)
+    {
+        return 0;
+    }
+    else
+    {
+        return (1 + countnode(start->right));
+    }
+}
+void insertBeg()
+{
+    Node *newnode, temp;
+    newnode = getNode();
+    if (start == NULL)
+    {
+        start = newnode;
+    }
+    else
+    {
+
+        newnode->right = start;
+        start->left = newnode;
+        start = newnode;
+    }
+}
+void insertEnd()
+{
+    Node *newnode, *temp;
+    newnode = getNode();
+    if (start == NULL)
+        start = newnode;
+    else
+    {
+        temp = start;
+        while (temp->right != NULL)
+        {
+            temp = temp->right;
+        }
+        temp->right = newnode;
+        newnode->left = temp;
+    }
+}
+void insertMid()
+{
+    Node *newnode, *temp;
+    newnode = getNode();
+    int pos, ctr = 1;
+    cout << "Enter the position:\n";
+    cin >> pos;
+    int nodectr = countnode(start);
+    if (pos > 1 && pos < nodectr)
+    {
+        temp = start;
+        while (ctr < pos)
+        {
+            temp = temp->right;
+
+            ctr++;
+        }
+        newnode->left = temp;
+        newnode->right = temp->right;
+        temp->right->left = newnode;
+        temp->right = newnode;
+    }
+    else
+    {
+        cout << "Position is Invalid.\n"
+    }
+}
+void delBeg()
+{
+    Node *temp;
+    if (start == NULL)
+        cout << "Empty List";
+    else
+    {
+        temp = start;
+        start = start->right;
+        start->left = NULL;
+        free(temp);
+        cout << "Deleted Succesfully\n";
+    }
+}
+void delMid()
+{
+}
+void delEnd()
+{
+    Node *temp;
+    if (start == NULL)
+    {
+        cout << "Empty List";
+        return;
+    }
+    else
+    {
+        temp = start;
+        while (temp->right != NULL)
+        {
+            temp=temp->right;
+        }
+        temp->left->right=NULL;
+        free(temp);
+        
     }
 }
 
@@ -82,11 +236,11 @@ int main()
             break;
 
         case 9:
-            cout << "The content from Right to Left= " << reverseTraverse(start);
+            reverseTraverse();
             break;
 
         case 10:
-            cout << "No of nodes= " << countnode(start);
+            cout << "No of nodes= " << (countnode(start));
             break;
         default:
             break;

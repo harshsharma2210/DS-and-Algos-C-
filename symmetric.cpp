@@ -1,27 +1,39 @@
 
 // Symmetric
 
-#include<iostream>
+#include <iostream>
 using namespace std;
 int main()
 {
-	int n,m,k,i,j;
-	cout<<"Enter the size of the matrix\n";
-	cin>>n;
-	m = n*(n+1)/2;
+	int n, m;
+	cout << "Enter the size of the matrix\n";
+	cin >> n;
+	m = n * (n + 1) / 2;
 	int a[m];
-	cout<<"Enter the elements\n";
-	for(i=0;i<m;i++)
-	cin>>a[i];
-	for(i=0;i<n;i++)
+	cout << "Enter the elements\n";
+	for (int i = 0; i < m; i++)
+		cin >> a[i];
+	int k = n - 1;
+	for (int i = 0; i < n; i++)
+		cout << a[i] << " ";
+	cout<<"\n";
+	for (int i = 1; i < n; i++)
 	{
-		for(j=0;j<n;j++)
+		cout << a[i] << " ";
+		int j = 0, m = k, ind = 0, last = i + m;
+		for (; j < i; j++)
 		{
+			cout << a[last] << " ";
+			ind = last;
+			m--;
+			last = last + m;
+			if (m == 0)
+				m = 1;
 		}
-		cout<<endl;
+		for (; j < n - 1; j++)
+		{
+			cout << a[++ind] << " ";
+		}
+		cout << "\n";
 	}
 }
-
-// 7 2 3
-// 2 8 4
-// 3 4 9
