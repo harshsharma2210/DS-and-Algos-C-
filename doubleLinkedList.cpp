@@ -197,7 +197,7 @@ void delMid()
         }
         else{
             cout<<"It is not a middle position\n";
-        }
+        } 
     }
 }
 void delEnd()
