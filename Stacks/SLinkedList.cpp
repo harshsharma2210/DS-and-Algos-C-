@@ -5,13 +5,14 @@ struct Node
     int data;
     struct Node *next;
 };
-struct Node *top = NULL;
+Node *top = NULL;
 void push(int val)
 {
-    struct Node *newnode = (struct Node *)malloc(sizeof(struct Node));
+    Node *newnode = new Node;
     newnode->data = val;
     newnode->next = top;
     top = newnode;
+    
 }
 void pop()
 {
@@ -45,6 +46,8 @@ int main()
     int ch, val;
     cout << "1) Push in stack" << endl;
     cout << "2) Pop from stack" << endl;
+    cout << "3) Display stack" << endl;
+    cout << "3) Display stack" << endl;
     cout << "3) Display stack" << endl;
     cout << "4) Exit" << endl;
     do
