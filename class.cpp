@@ -1,72 +1,115 @@
-#include <stdio.h>
-#include <string.h>
-struct student
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class SinglyLinkedListNode
 {
-	char stu_name[30];
-	int roll;
-	char group;
-	float fees;
-};
-struct student stu;
-void set_data()
-{
-	printf("Enter details of Student:  \n name \nroll \nfees\n  ");
-	scanf("%s", &stu.stu_name);
-	scanf("%d", &stu.roll);
-	scanf("%f", &stu.fees);
-}
-void print_data()
-{
-	printf("Details are :\n");
-	printf("%s \n %d \n %f ", stu.stu_name, stu.roll, stu.fees);
-}
-void allocate_group()
-{
-	if ((stu.stu_name[0] >= 'A' && stu.stu_name[0] <= 'P') || (stu.stu_name[0] >= 'a' && stu.stu_name[0] <= 'p'))
-		stu.group = 'A';
-	else
-		stu.group = 'B';
-}
-void alternative_charater()
-{
-	int i;
-	for (i = 0; i < strlen(stu.stu_name); i = i + 2)
+public:
+	int data;
+	SinglyLinkedListNode *next;
+
+	SinglyLinkedListNode(int node_data)
 	{
-		printf("%c", stu.stu_name[i]);
+		this->data = node_data;
+		this->next = nullptr;
+	}
+};
+
+class SinglyLinkedList
+{
+public:
+	SinglyLinkedListNode *head;
+
+	SinglyLinkedList()
+	{
+		this->head = nullptr;
+	}
+};
+
+void print_singly_linked_list(SinglyLinkedListNode *node, string sep, ofstream &fout)
+{
+	while (node)
+	{
+		fout << node->data;
+
+		node = node->next;
+
+		if (node)
+		{
+			fout << sep;
+		}
 	}
 }
+
+void free_singly_linked_list(SinglyLinkedListNode *node)
+{
+	while (node)
+	{
+		SinglyLinkedListNode *temp = node;
+		node = node->next;
+
+		free(temp);
+	}
+}
+
+// Complete the insertNodeAtTail function below.
+
+/*
+ * For your reference:
+ *
+ * SinglyLinkedListNode {
+ *     int data;
+ *     SinglyLinkedListNode* next;
+ * };
+ *
+ */
+SinglyLinkedListNode *insertNodeAtTail(SinglyLinkedListNode *head, int data)
+{
+	SinglyLinkedListNode *newNode;
+	newNode->data = data;
+	newNode->next = NULL;
+	SinglyLinkedListNode *temp;
+	temp = head;
+	if (head == NULL)
+	{
+
+		head = newNode;
+		return head;
+	}
+	while (temp->next != NULL)
+	{
+		temp = temp->next;
+	}
+	temp->next = newNode;
+	return head;
+}
+
 int main()
 {
-	char choice;
-	int ch;
-	struct stu;
+	ofstream fout(getenv("OUTPUT_PATH"));
 
-	do
+	SinglyLinkedList *llist = new SinglyLinkedList();
+
+	int llist_count;
+	cin >> llist_count;
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+	for (int i = 0; i < llist_count; i++)
 	{
-		printf("\n Press 1 ENTER DETAILS OF STUDENT EXCEPT GROUP ");
-		printf("\n Press 2 TO PRINT THE DETAILS OF STUDENT EXCEPT GROUP ");
-		printf("\n Press 3 TO ALLOCATE GROUP A OR B");
-		printf("\n Press 4 PRINTING ALTERENATIVE CHARACTER TO STUDENT NAME \n");
-		scanf("%d", &ch);
-		switch (ch)
-		{
-		case 1:
-			set_data();
-			break;
-		case 2:
-			print_data();
-			break;
-		case 3:
-			allocate_group();
-			break;
-		case 4:
-			alternative_charater();
-			break;
-		default:
-			printf("Wrong choice!");
-		}
-		printf("\n Do you want to continue? (Press y/n)");
-		scanf(" %c", &choice);
-	} while (choice == 'y');
+		int llist_item;
+		cin >> llist_item;
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+		SinglyLinkedListNode *llist_head = insertNodeAtTail(llist->head, llist_item);
+		llist->head = llist_head;
+	}
+
+	print_singly_linked_list(llist->head, "\n", fout);
+	fout << "\n";
+
+	free_singly_linked_list(llist->head);
+
+	fout.close();
+
 	return 0;
 }
