@@ -2,114 +2,92 @@
 
 using namespace std;
 
-class SinglyLinkedListNode
-{
-public:
-	int data;
-	SinglyLinkedListNode *next;
-
-	SinglyLinkedListNode(int node_data)
-	{
-		this->data = node_data;
-		this->next = nullptr;
-	}
-};
-
-class SinglyLinkedList
-{
-public:
-	SinglyLinkedListNode *head;
-
-	SinglyLinkedList()
-	{
-		this->head = nullptr;
-	}
-};
-
-void print_singly_linked_list(SinglyLinkedListNode *node, string sep, ofstream &fout)
-{
-	while (node)
-	{
-		fout << node->data;
-
-		node = node->next;
-
-		if (node)
-		{
-			fout << sep;
-		}
-	}
-}
-
-void free_singly_linked_list(SinglyLinkedListNode *node)
-{
-	while (node)
-	{
-		SinglyLinkedListNode *temp = node;
-		node = node->next;
-
-		free(temp);
-	}
-}
-
-// Complete the insertNodeAtTail function below.
+string ltrim(const string &);
+string rtrim(const string &);
 
 /*
- * For your reference:
+ * Complete the 'getMax' function below.
  *
- * SinglyLinkedListNode {
- *     int data;
- *     SinglyLinkedListNode* next;
- * };
- *
+ * The function is expected to return an INTEGER_ARRAY.
+ * The function accepts STRING_ARRAY operations as parameter.
  */
-SinglyLinkedListNode *insertNodeAtTail(SinglyLinkedListNode *head, int data)
-{
-	SinglyLinkedListNode *newNode;
-	newNode->data = data;
-	newNode->next = NULL;
-	SinglyLinkedListNode *temp;
-	temp = head;
-	if (head == NULL)
-	{
 
-		head = newNode;
-		return head;
-	}
-	while (temp->next != NULL)
-	{
-		temp = temp->next;
-	}
-	temp->next = newNode;
-	return head;
+vector<int> getMax(vector<string> operations) {
+    vector <int> v;
+    string a="";
+    for(int i=0;i<operations.size();i++)
+    {
+        string a=operations[i];
+        if(a[0]=="1")
+        {
+            v.push_back((stoi)(a.substr(2,a.length()-1)));
+            cout<<"1st"<<endl;
+        }   
+        if(a[0]=="2")
+        {
+            cout<<"2nd"<<endl;
+        }   
+        if(a[0]=="3")
+        {
+            cout<<"3rd"<<endl;
+        }        
+    }
+    return v;
 }
 
 int main()
 {
-	ofstream fout(getenv("OUTPUT_PATH"));
+    ofstream fout(getenv("OUTPUT_PATH"));
 
-	SinglyLinkedList *llist = new SinglyLinkedList();
+    string n_temp;
+    getline(cin, n_temp);
 
-	int llist_count;
-	cin >> llist_count;
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    int n = stoi(ltrim(rtrim(n_temp)));
 
-	for (int i = 0; i < llist_count; i++)
-	{
-		int llist_item;
-		cin >> llist_item;
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    vector<string> ops(n);
 
-		SinglyLinkedListNode *llist_head = insertNodeAtTail(llist->head, llist_item);
-		llist->head = llist_head;
-	}
+    for (int i = 0; i < n; i++) {
+        string ops_item;
+        getline(cin, ops_item);
 
-	print_singly_linked_list(llist->head, "\n", fout);
-	fout << "\n";
+        ops[i] = ops_item;
+    }
 
-	free_singly_linked_list(llist->head);
+    vector<int> res = getMax(ops);
 
-	fout.close();
+    for (size_t i = 0; i < res.size(); i++) {
+        fout << res[i];
 
-	return 0;
+        if (i != res.size() - 1) {
+            fout << "\n";
+        }
+    }
+
+    fout << "\n";
+
+    fout.close();
+
+    return 0;
+}
+
+string ltrim(const string &str) {
+    string s(str);
+
+    s.erase(
+        s.begin(),
+        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
+    );
+
+    return s;
+}
+
+string rtrim(const string &str) {
+    string s(str);
+
+    s.erase(
+        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
+        s.end()
+    );
+
+    return s;
 }
