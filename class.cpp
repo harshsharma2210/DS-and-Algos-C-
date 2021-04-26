@@ -1,26 +1,23 @@
 #include <bits/stdc++.h>
-#include <vector>
-class Solution
+using namespace std;
+
+int main()
 {
-public:
-    vector<int> twoSum(vector<int> &nums, int target)
+    // your code goes here
+    vector<int> v;
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++)
     {
-        vector<int> a;
-
-        for (int i = 0; i < nums.size(); i++)
-        {
-            int a = nums[i];
-            for (int j = i + 1; j < nums.size(); j++)
-            {
-
-                if (nums[j] * a == target)
-                {
-                    a.push_back(i);
-                    a.push_back(j);
-                    break;
-                }
-            }
-        }
-        return a;
+        int a;
+        cin >> a;
+        v.push_back(a);
     }
-};
+    sort(v.begin(), v.end());
+    for (auto x : v)
+    {
+        cout << x << " ";
+    }
+
+    return 0;
+}
