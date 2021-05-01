@@ -1,23 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main()
+class Solution
 {
-    // your code goes here
-    vector<int> v;
-    int n;
-    cin >> n;
-    for (int i = 0; i < n; i++)
+public:
+    string reverseStr(string s, int k)
     {
-        int a;
-        cin >> a;
-        v.push_back(a);
+        cout << k << endl;
+        for (int i = 0; i < s.length(); i = i)
+        {
+            for (int j = 0; j < k; j++)
+            {
+                char ch = s[i];
+                s = ch + s;
+                i++;
+                cout << i;
+            }
+        }
+        return s;
     }
-    sort(v.begin(), v.end());
-    for (auto x : v)
-    {
-        cout << x << " ";
-    }
-
-    return 0;
-}
+};

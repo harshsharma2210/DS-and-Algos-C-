@@ -1,50 +1,46 @@
-
-//  C++ code for Pascal's Triangle
-#include <stdio.h>
-
-// See https://www.geeksforgeeks.org/space-and-time-efficient-binomial-coefficient/
-// for details of this function
-int binomialCoeff(int n, int k);
-
-// Function to print first
-// n lines of Pascal's
-// Triangle
-void printPascal(int n)
+#include <bits/stdc++.h>
+#include <vector>
+using namespace std;
+class Solution
 {
-    // Iterate through every line and
-    // print entries in it
-    for (int line = 0; line < n; line++)
+public:
+    vector<vector<int>> generate(int numRows)
     {
-        // Every line has number of
-        // integers equal to line
-        // number
-        for (int i = 0; i <= line; i++)
-            printf("%d ",
-                   binomialCoeff(line, i));
-        printf("\n");
-    }
-}
+        vector<vector<int>> r(numRows);
 
-// See https://www.geeksforgeeks.org/space-and-time-efficient-binomial-coefficient/
-// for details of this function
-int binomialCoeff(int n, int k)
+        for (int i = 0; i < numRows; i++)
+        {
+            r[i].resize(i + 1);
+            r[i][0] = r[i][i] = 1;
+
+            for (int j = 1; j < i; j++)
+                r[i][j] = r[i - 1][j - 1] + r[i - 1][j];
+        }
+
+        return r;
+    }
+};
+class Solution
 {
-    int res = 1;
-    if (k > n - k)
-        k = n - k;
-    for (int i = 0; i < k; ++i)
+public:
+    vector<int> getRow(int rowIndex)
     {
-        res *= (n - i);
-        res /= (i + 1);
+        vector<int> v = {1};
+        vector<vector<int>> v2(rowIndex);
+        int i;
+        for (i = 0; i <= rowIndex; i++)
+        {
+            v2[i].resize(i + 1);
+            v2[i][0] = v2[i][i] = 1;
+            for (int j = 1; j < i; j++)
+            {
+                v2[i][j] = v2[i - 1][j - 1] + v2[i - 1][j];
+            }
+        }
+        for (auto x : v2[i])
+        {
+            cout << x;
+        }
+        return v;
     }
-
-    return res;
-}
-
-// Driver program
-int main()
-{
-    int n = 7;
-    printPascal(n);
-    return 0;
-}
+};
