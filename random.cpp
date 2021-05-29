@@ -1,210 +1,134 @@
-// #include <iostream>
-// using namespace std;
-// #include <bits/stdc++.h>
-// void bfs(vector<vector<int>> input, int starting_index, int end, int m, int n)
-// {
-//     queue<int> q;
-//     q.push(starting_index);
-//     bool visited[m * n + 1];
-//     unordered_map<int, int> parent;
-//     parent[starting_index] = -1;
-//     for (int i = 0; i < m * n + 1; i++)
-//     {
-//         visited[i] = false;
-//     }
-//     visited[starting_index] = true;
-//     while (!q.empty())
-//     {
-//         int current_element = q.front();
-//         q.pop();
-//         if (current_element == end)
-//         {
-//             vector<int> output;
-//             output.push_back(current_element);
-//             while (current_element != starting_index)
-//             {
-//                 output.push_back(parent[current_element]);
-//                 current_element = parent[current_element];
-//             }
-//             for (int i = output.size() - 1; i >= 0; i--)
-//             {
-//                 cout << output[i] << " ";
-//             }
-//             cout << endl;
-//             return;
-//         }
-//         if (input[current_element][1] == 1 && current_element - n > 0 && current_element <= m * n && visited[current_element - n] == false)
-//         {
-//             q.push(current_element - n);
-//             visited[current_element - n] = true;
-//             parent[current_element - n] = current_element;
-//         }
-//         if (input[current_element][2] == 1 && current_element - n + 1 > 0 && current_element <= m * n && visited[current_element - n + 1] == false)
-//         {
-//             q.push(current_element - n + 1);
-//             visited[current_element - n + 1] = true;
-//             parent[current_element - n + 1] = current_element;
-//         }
-//         if (input[current_element][3] == 1 && current_element + 1 > 0 && current_element <= m * n && visited[current_element + 1] == false)
-//         {
-//             q.push(current_element + 1);
-//             visited[current_element + 1] = true;
-//             parent[current_element + 1] = current_element;
-//         }
-//         if (input[current_element][4] == 1 && current_element + n + 1 > 0 && current_element <= m * n && visited[current_element + n + 1] == false)
-//         {
-//             q.push(current_element + n + 1);
-//             visited[current_element + n + 1] = true;
-//             parent[current_element + n + 1] = current_element;
-//         }
-//         if (input[current_element][5] == 1 && current_element + n > 0 && current_element <= m * n && visited[current_element + n] == false)
-//         {
-//             q.push(current_element + n);
-//             visited[current_element + n] = true;
-//             parent[current_element + n] = current_element;
-//         }
-//         if (input[current_element][6] == 1 && current_element + n - 1 > 0 && current_element <= m * n && visited[current_element + n - 1] == false)
-//         {
-//             q.push(current_element + n - 1);
-//             visited[current_element + n - 1] = true;
-//             parent[current_element + n - 1] = current_element;
-//         }
-//         if (input[current_element][7] == 1 && current_element - 1 > 0 && current_element <= m * n && visited[current_element - 1] == false)
-//         {
-//             q.push(current_element - 1);
-//             visited[current_element - 1] = true;
-//             parent[current_element - 1] = current_element;
-//         }
-//         if (input[current_element][8] == 1 && current_element - n - 1 > 0 && current_element <= m * n && visited[current_element - n - 1] == false)
-//         {
-//             q.push(current_element - n - 1);
-//             visited[current_element - n - 1] = true;
-//             parent[current_element - n - 1] = current_element;
-//         }
-
-//         // 		for(int i = 0; i < current_element.size(); i++){
-//         // 		    if(i == current_element){
-//         // 		    continue;
-//         // 		    }
-//         //     		if(visited[i]){
-//         //     		    continue;
-//         //     		}
-//         // 		if(input[current_element][i] == 1){
-//         // 		    q.push(i);
-//         // 		    parent[i] = current_element;
-//         //             visited[i] = true;
-//         // 		}
-//         // 		}
-//     }
-// }
-// int main()
-// {
-//     // your code goes here
-//     int m = 0, n = 0, s = 0;
-//     cin >> m;
-//     cin >> n;
-//     cin >> s;
-//     vector<vector<int>> input(m * n + 1, vector<int>(9));
-//     for (int i = 1; i < m * n + 1; i++)
-//     {
-//         for (int j = 0; j < 9; j++)
-//         {
-//             cin >> input[i][j];
-//         }
-//     }
-//     bfs(input, s, 1, m, n);
-//     bfs(input, s, n, m, n);
-//     bfs(input, s, 1 + n * (m - 1), m, n);
-//     bfs(input, s, m * n, m, n);
-// }
-
-#include<iostream>
 #include <bits/stdc++.h>
 using namespace std;
-void mergerow(int * arr,int mlb,int mub,int nlb,int nub,int n){
-   for(int i=mlb;i<=mub;i++){
-    int c[nub-nlb+1]={0};
-    int g=0;
-    for(int j=nlb;j<=nub;j++){
-    	c[g]= *((arr+n*i)+j);
-    	g++;
-	}
-	for(int k=0;k<g-1;k++){
-	    int temp=0;
-		for(int j=0;j<g-k-1;j++){
-			if(c[j]>=c[j+1]){
-				temp=c[j];
-				c[j]=c[j+1];
-				c[j+1]=temp;
-			}
-		}
- }
-   
-	int k=g-1;
-	int h=0;
-    for(int j=nlb;j<=nub && h<=k;j++){
-		*((arr+i*n)+j)=c[h];
-		h++;
-	}
-}
-}
-void mergecol(int * arr,int mlb,int mub,int nlb,int nub,int n){
- for(int i=nlb;i<=nub;i++){
- 	int c[mub-mlb+1];
- 	int g=0;
- 	for(int j=mlb;j<=mub;j++){
-    	c[g]= *((arr+n*j)+i);
-    	g++;
-	}
-	 for(int k=0;k<g-1;k++){
-	    int temp=0;
-		for(int j=0;j<g-k-1;j++){
-			if(c[j]>=c[j+1]){
-				temp=c[j];
-				c[j]=c[j+1];
-				c[j+1]=temp;
-			}
-		}
-  }
-   int k=g-1;
-	int h=0;
-	for(int j=mlb;j<=mub && h<=k;j++){
-		*((arr+j*n)+i)=c[h];
-		h++;
-	}
- }
+class Graph
+{
+	int **edges;
+	int *path;
+	int *visited;
 
-}
-void mergesort(int *arr,int mlb,int mub,int nlb,int nub,int n){
-	if(mub-mlb>1 or nub-nlb>1){
-		int midm=0,midn=0;
-		midm=(mlb+mub)/2;
-		midn=(nlb+nub)/2;
-		mergesort(arr,mlb,midm,nlb,midn,n);
-		mergesort(arr,mlb,midm,midn+1,nub,n);
-	    mergesort(arr,midm+1,mub,nlb,midn,n);
-	    mergesort(arr,midm+1,mub,midn+1,nub,n);
-	}
-	
-	mergerow(arr,mlb,mub,nlb,nub,n);
-	mergecol(arr,mlb,mub,nlb,nub,n);
-}
-int main(){
-	int m,n,x;
-	cin>>m;
-	cin>>n;
-	int arr[m][n];
-	for(int i=0;i<m;i++){
-		for(int j=0;j<n;j++){
-			cin>>x;
-			arr[i][j]=x;
+public:
+	Graph(int n, int m)
+	{
+		edges = new int *[m * n + 1];
+
+		path = new int[n * m + 1];
+		visited = new int[n * m + 1];
+		for (int i = 0; i < n * m + 1; i++)
+		{
+			edges[i] = new int[10];
+			path[i] = -1;
+			visited[i] = INT_MAX;
 		}
 	}
-	mergesort((int *)arr,0,m-1,0,n-1,n);
-	for(int i=0;i<m;i++){
-		for(int j=0;j<n;j++){
-			cout<<arr[i][j]<<" ";
+	void addEdge(int x, int y, int count)
+	{
+		edges[x][count] = y;
+		;
+	}
+	void bfs(int src, int z, int count[])
+	{
+		visited[src] = z;
+		z = z + 1;
+		for (int i = 0; i < count[src]; i++)
+		{
+			if (visited[edges[src][i]] > z)
+			{
+				path[edges[src][i]] = src;
+				bfs(edges[src][i], z, count);
+			}
 		}
 	}
-	return 0;
+	void path_finding(int j)
+	{
+		if (path[j] == -1)
+		{
+			cout << j << " ";
+			return;
+		}
+		else
+		{
+			path_finding(path[j]);
+			cout << j << " ";
+		}
+	}
+	void path_print()
+	{
+		for (int i = 1; i < 41; i++)
+		{
+			cout << path[i] << " ";
+		}
+	}
+};
+int main()
+{
+	int n, m;
+	cin >> m;
+	cin >> n;
+	Graph G(m, n);
+	int src;
+	cin >> src;
+	int countarr[m * n + 1];
+	int matrix[m * n + 1][8];
+	for (int i = 1; i < m * n + 1; i++)
+	{
+		int x;
+		cin >> x;
+		for (int j = 0; j < 8; j++)
+		{
+			cin >> matrix[i][j];
+		}
+	}
+	for (int i = 1; i < m * n + 1; i++)
+	{
+		int c = 0;
+		if (matrix[i][0] == 1)
+		{
+			G.addEdge(i, i - n, c);
+			c++;
+		}
+		if (matrix[i][1] == 1)
+		{
+			G.addEdge(i, i - n + 1, c);
+			c++;
+		}
+		if (matrix[i][2] == 1)
+		{
+			G.addEdge(i, i + 1, c);
+			c++;
+		}
+		if (matrix[i][3] == 1)
+		{
+			G.addEdge(i, i + n + 1, c);
+			c++;
+		}
+		if (matrix[i][4] == 1)
+		{
+			G.addEdge(i, i + n, c);
+			c++;
+		}
+		if (matrix[i][5] == 1)
+		{
+			G.addEdge(i, i + n - 1, c);
+			c++;
+		}
+		if (matrix[i][6] == 1)
+		{
+			G.addEdge(i, i - 1, c);
+			c++;
+		}
+		if (matrix[i][7] == 1)
+		{
+			G.addEdge(i, i - n - 1, c);
+			c++;
+		}
+		countarr[i] = c;
+	}
+	G.bfs(src, 0, countarr);
+	G.path_finding(1);
+	cout << endl;
+	G.path_finding(n);
+	cout << endl;
+	G.path_finding((m - 1) * (n) + 1);
+	cout << endl;
+	G.path_finding(m * n);
 }
