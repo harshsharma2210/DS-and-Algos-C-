@@ -1,0 +1,1 @@
+{"name":"Local: PrateekSirandCoding","url":"/home/hs/Desktop/Coding/C++/STL/PrateekSirandCoding.cpp","tests":[{"id":1625557155928,"input":"7\n2 73\n2 83\n2 43\n1\n1\n2 16\n2 48","output":"43\n83"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/hs/Desktop/Coding/C++/STL/PrateekSirandCoding.cpp","group":"local","local":true}

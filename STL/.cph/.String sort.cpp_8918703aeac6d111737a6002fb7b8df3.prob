@@ -1,0 +1,1 @@
+{"name":"Local: String sort","url":"/home/hs/Desktop/Coding/C++/STL/String sort.cpp","tests":[{"id":1625553920612,"input":"3\nbat\napple\nbatman","output":"apple\nbatman\nbat"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/hs/Desktop/Coding/C++/STL/String sort.cpp","group":"local","local":true}
