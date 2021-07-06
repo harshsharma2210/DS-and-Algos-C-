@@ -9,3 +9,29 @@
 // 1 2 2 2 3
 // Output Format: Display the number with the maximum frequency.
 // Sample Output: 2
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n;
+    cin >> n;
+    unordered_map<int, int> m;
+    for (int i = 0; i < n; i++)
+    {
+        int x;
+        cin >> x;
+        m[x]++;
+    }
+    int maxFreq = 0;
+    int ans = 0;
+    for (auto it : m)
+    {
+        if (it.second > maxFreq)
+        {
+            maxFreq = it.second;
+            ans = it.first;
+        }
+    }
+    cout << ans;
+}

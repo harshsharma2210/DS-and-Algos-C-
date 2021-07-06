@@ -1,0 +1,1 @@
+{"name":"Local: HighestFreqHashing","url":"/home/hs/Desktop/Coding/C++/STL/HighestFreqHashing.cpp","tests":[{"id":1625575131878,"input":"5\n1 2 2 2 3","output":"2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/hs/Desktop/Coding/C++/STL/HighestFreqHashing.cpp","group":"local","local":true}
