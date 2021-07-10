@@ -1,34 +1,45 @@
-
-// CPP program to find minimum number of
-// elements such that their sum is greater
-// than sum of remaining elements of the array.
+// { Driver Code Starts
 #include <bits/stdc++.h>
-#include <string.h>
 using namespace std;
 
-// function to find minimum elements needed.
-int minElements(int arr[], int n)
+// } Driver Code Ends
+class Solution
 {
-    sort(arr, arr + n, greater<int>());
-    int sum = 0;
-    int count = 0;
-    for (int i = 0; i < n-1; i++)
+public:
+    long long findMinDiff(vector<long long> a, long long n, long long m)
     {
-        sum = sum + arr[i];
-        count++;
-        if (sum > accumulate(arr + i+1, arr + n, 0))
+        //code
+        sort(a.begin(), a.begin() + n);
+        long long sum = 0;
+        for (int i = 0; i < n - m; i++)
         {
-            break;
+            sum = max(sum, accumulate(a.begin() + i, a.begin() + m, 0));
         }
+        return sum;
     }
-    return count;
-}
+};
 
-// Driver function
+// { Driver Code Starts.
 int main()
 {
-    int arr[] = {2,1,2};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    cout << minElements(arr, n) << endl;
+    long long t;
+    cin >> t;
+    while (t--)
+    {
+        long long n;
+        cin >> n;
+        vector<long long> a;
+        long long x;
+        for (long long i = 0; i < n; i++)
+        {
+            cin >> x;
+            a.push_back(x);
+        }
+
+        long long m;
+        cin >> m;
+        Solution ob;
+        cout << ob.findMinDiff(a, n, m) << endl;
+    }
     return 0;
-}
+} // } Driver Code Ends
