@@ -1,45 +1,46 @@
-// { Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
 
-// } Driver Code Ends
-class Solution
-{
-public:
-    long long findMinDiff(vector<long long> a, long long n, long long m)
-    {
-        //code
-        sort(a.begin(), a.begin() + n);
-        long long sum = 0;
-        for (int i = 0; i < n - m; i++)
-        {
-            sum = max(sum, accumulate(a.begin() + i, a.begin() + m, 0));
-        }
-        return sum;
-    }
-};
-
-// { Driver Code Starts.
 int main()
 {
-    long long t;
+    // your code goes here
+    int t;
     cin >> t;
     while (t--)
     {
-        long long n;
-        cin >> n;
-        vector<long long> a;
-        long long x;
-        for (long long i = 0; i < n; i++)
+        vector<int> v;
+        int x;
+        int y;
+        cin >> x >> y;
+        int count = 1;
+        v.push_back(x + 3);
+        v.push_back(y + 2);
+        while (true)
         {
-            cin >> x;
-            a.push_back(x);
+            if (v[0] > 5 && v[1] > 10)
+            {
+                count++;
+                v[0] -= 5;
+                v[1] -= 10;
+                v[0] += 3;
+                v[1] += 2;
+                count++;
+            }
+            else if (v[0] > 20 && v[1] > 5)
+            {
+                count++;
+                v[0] -= 20;
+                v[1] += 5;
+                v[0] += 3;
+                v[1] += 2;
+                count++;
+            }
+            else
+            {
+                break;
+            }
         }
-
-        long long m;
-        cin >> m;
-        Solution ob;
-        cout << ob.findMinDiff(a, n, m) << endl;
+        cout << count << endl;
     }
     return 0;
-} // } Driver Code Ends
+}
