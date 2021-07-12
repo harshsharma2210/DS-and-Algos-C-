@@ -3,44 +3,61 @@ using namespace std;
 
 int main()
 {
-    // your code goes here
+
+    // your code here
     int t;
     cin >> t;
     while (t--)
     {
-        vector<int> v;
-        int x;
-        int y;
-        cin >> x >> y;
-        int count = 1;
-        v.push_back(x + 3);
-        v.push_back(y + 2);
-        while (true)
+        int m, n;
+        cin >> m >> n;
+        m--;
+        n--;
+        vector<int> x, y;
+        for (int i = 0; i < m; i++)
         {
-            if (v[0] > 5 && v[1] > 10)
+            int a;
+            cin >> a;
+            x.push_back(a);
+        }
+        for (int i = 0; i < n; i++)
+        {
+            int a;
+            cin >> a;
+            y.push_back(a);
+        }
+        int cost = 0;
+        sort(x.begin(), x.begin() + m, greater<int>());
+        sort(y.begin(), y.begin() + n, greater<int>());
+        int hz = 1, vr = 1;
+        int i = 0, j = 0;
+        while (i < m && j < n)
+        {
+            if (x[i] > y[i])
             {
-                count++;
-                v[0] -= 5;
-                v[1] -= 10;
-                v[0] += 3;
-                v[1] += 2;
-                count++;
-            }
-            else if (v[0] > 20 && v[1] > 5)
-            {
-                count++;
-                v[0] -= 20;
-                v[1] += 5;
-                v[0] += 3;
-                v[1] += 2;
-                count++;
+                cost += x[i] * vr;
+                hz++;
+                i++;
             }
             else
             {
-                break;
+                cost += y[j] * hz;
+                vr++;
+                j++;
             }
         }
-        cout << count << endl;
+        while (i < m)
+        {
+            cost += x[i] * vr;
+            i++;
+        }
+        while (j < n)
+        {
+            cost += y[j] * hz;
+            j++;
+        }
+        cout << cost << endl;
     }
+
     return 0;
 }
