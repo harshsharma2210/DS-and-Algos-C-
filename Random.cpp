@@ -27,8 +27,8 @@ int main()
             y.push_back(a);
         }
         int cost = 0;
-        sort(x.begin(), x.begin() + m, greater<int>());
-        sort(y.begin(), y.begin() + n, greater<int>());
+        sort(x.begin(), x.end(), greater<int>());
+        sort(y.begin(), y.end(), greater<int>());
         int hz = 1, vr = 1;
         int i = 0, j = 0;
         while (i < m && j < n)
