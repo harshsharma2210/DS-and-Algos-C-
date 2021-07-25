@@ -1,1 +1,0 @@
-{"name":"Local: RatinAmaze","url":"/home/hs/Desktop/Coding/C++/Graph/RatinAmaze.cpp","tests":[{"id":1627100619577,"input":"1\n4\n1 0 0 0\n1 1 0 1\n1 1 0 0\n0 1 1 1","output":"DDRDRR DRDDRR"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/hs/Desktop/Coding/C++/Graph/RatinAmaze.cpp","group":"local","local":true}
