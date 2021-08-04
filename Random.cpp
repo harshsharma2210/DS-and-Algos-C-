@@ -3,55 +3,51 @@
 using namespace std;
 
 // } Driver Code Ends
-
 class Solution
 {
 public:
-    //Function to return max value that can be put in knapsack of capacity W.
-    int knapSack(int W, int wt[], int val[], int n)
+    int LongestRepeatingSubsequence(string str)
     {
-        // Your code here
-        if (n == 0 || W == 0)
+        // Code here
+        int len = str.length();
+        string strr = str;
+        int t[len + 1][len + 1];
+        memset(t, -1, sizeof(t));
+        for (int i = 0; i < len + 1; i++)
         {
-            return 0;
+            for (int j = 0; j < len + 1; j++)
+            {
+                if (i == 0 || j == 0)
+                    t[i][j] = 0;
+            }
         }
-        if (wt[n - 1] > W)
+        reverse(strr, strr + len);
+        for (int i = 1; i < len + 1; i++)
         {
-            return knapSack(W - wt[n - 1], int wt[], int val[], int n - 1);
+            for (int j = 1; j < len + 1; j++)
+            {
+                if (str[i - 1] == str[j - 1] && i != j)
+                    t[i][j] = 1 + t[i - 1][j - 1];
+                else
+                    t[i][j] = max(t[i][j - 1], t[i - 1][j]);
+            }
         }
-        else if (wt[n - 1] <= W)
-        {
-            return max(val[n - 1] - knapSack(W - wt[n - 1], int w[], int val[], int n - 1), knapSack(W, wt[], val[], n - 1));
-        }
+        return t[len][len];
     }
 };
 
 // { Driver Code Starts.
-
 int main()
 {
-    //taking total testcases
-    int t;
-    cin >> t;
-    while (t--)
+    int tc;
+    cin >> tc;
+    while (tc--)
     {
-        //reading number of elements and weight
-        int n, w;
-        cin >> n >> w;
-
-        int val[n];
-        int wt[n];
-
-        //inserting the values
-        for (int i = 0; i < n; i++)
-            cin >> val[i];
-
-        //inserting the weights
-        for (int i = 0; i < n; i++)
-            cin >> wt[i];
-        Solution ob;
-        //calling method knapSack()
-        cout << ob.knapSack(w, wt, val, n) << endl;
+        string str;
+        cin >> str;
+        Solution obj;
+        int ans = obj.LongestRepeatingSubsequence(str);
+        cout << ans << "\n";
     }
     return 0;
 } // } Driver Code Ends
