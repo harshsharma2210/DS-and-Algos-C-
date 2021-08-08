@@ -10,21 +10,27 @@ using namespace std;
 class Solution
 {
 public:
-    static int recur(int n, int r, int t[][801])
+    int maxGold(int n, int m, vector<vector<int>> M)
     {
-        if (r == 0)
-            return 1;
-        if (t[n][r] != -1)
-            return t[n][r];
-
-        return t[n][r] = recur(n - 1, r - 1, t) + recur(n - 1, r, t);
-    }
-    int nCr(int n, int r)
-    {
-        // code here
-        int t[n + 1][r + 1]={{0}};
-        memset(t, -1, sizeof(t));
-        return recur(n, r, t);
+        if (n == 1)
+        {
+            int sum = 0;
+            for (int j = 0; j < m; j++)
+                sum += M[0][j];
+            return sum;
+        }
+        for (int j = 1; j < m; j++)
+            for (int i = 0; i < n; i++)
+                if (i == 0)
+                    M[i][j] += max(M[i][j - 1], M[i + 1][j - 1]);
+                else if (i == n - 1)
+                    M[i][j] += max(M[i][j - 1], M[i - 1][j - 1]);
+                else
+                    M[i][j] += max(M[i][j - 1], max(M[i - 1][j - 1], M[i + 1][j - 1]));
+        int mx = 0;
+        for (int i = 0; i < n; i++)
+            mx = max(mx, M[i][m - 1]);
+        return mx;
     }
 };
 
@@ -36,11 +42,17 @@ int main()
     cin >> t;
     while (t--)
     {
-        int n, r;
-        cin >> n >> r;
+        int n, m;
+        cin >> n >> m;
+        vector<vector<int>> M(n, vector<int>(m, 0));
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+                cin >> M[i][j];
+        }
 
         Solution ob;
-        cout << ob.nCr(n, r) << endl;
+        cout << ob.maxGold(n, m, M) << "\n";
     }
     return 0;
 } // } Driver Code Ends
