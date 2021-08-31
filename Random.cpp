@@ -1,53 +1,27 @@
-class Solution
+int sb(int arr[], int n, int x)
 {
-public:
-    vector<int> findAnagrams(string s, string p)
+    // Your code goes here
+    int i = 0;
+    int j = 0;
+    int currsum = 0;
+    int ans = INT_MAX;
+    while (j < n)
     {
-        int i = 0, j = 0, counter, tn = p.size(), n = s.size();
-        vector<int> l;
-        unordered_map<char, int> tm;
-        unordered_map<char, int> m;
-        //intitalise the target map first for further references
-        for (int k = 0; k < p.size(); k++)
+        = "" currsum += "arr[j];" if (currsum < x) = ""
         {
-            tm[p[k]]++;
-            m[p[k]]++;
+            = "" j++;
+            = ""
         }
-        counter = tm.size();
-        while (j < n)
+        = "" else = "" if (currsum = "" >= x)
         {
-            if (tm[s[j]] > 0)
+            while (currsum > x)
             {
-                m[s[j]]--;
-                if (m[s[j]] == 0)
-                {
-                    counter--;
-                }
-            }
-
-            if ((j - i + 1) < tn)
-            {
-                j++;
-            }
-            else if ((j - i + 1) == tn)
-            {
-                if (counter == 0)
-                {
-                    l.push_back(i);
-                }
-                if (tm[s[i]] > 0)
-                {
-                    m[s[i]]++;
-                    if (m[s[i]] == 1)
-                    {
-                        counter++;
-                    }
-                }
-
+                ans = min(j - i + 1, ans);
+                currsum -= arr[i];
                 i++;
-                j++;
             }
+            j++;
         }
-        return l;
     }
-};
+    return ans;
+}
