@@ -13,7 +13,7 @@ Node *merge(Node *l1, Node *l2)
     else
     {
         l2->next = merge(l1, l2->next);
-        return l2;
+        return l2;d
     }
 }
 Node *mergeSort(Node *head)
