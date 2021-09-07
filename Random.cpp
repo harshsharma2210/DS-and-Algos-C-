@@ -1,38 +1,34 @@
-Node *merge(Node *l1, Node *l2)
+class Solution
 {
-    if (!l1)
-        return l2;
-    if (!l2)
-        return l1;
-
-    if (l1->data < l2->data)
+public:
+    int findMaxLen(string s)
     {
-        l1->next = merge(l1->next, l2);
-        return l1;
+        // code here
+        int count = 0;
+        stack<int> st;
+        bool flag = true;
+        for (int i = 0; i < s.length(); i++)
+        {
+            char ch = s[i];
+            switch (ch)
+            {
+            case '(':
+                st.push('(');
+                break;
+            case ')':
+                if (st.top() == ')')
+                {
+                    count += 2;
+                }
+                else
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            if (!flag)
+                break;
+        }
+        return count;
     }
-    else
-    {
-        l2->next = merge(l1, l2->next);
-        return l2;d
-    }
-}
-Node *mergeSort(Node *head)
-{
-    // your code here
-    if (head == NULL || head->next == NULL)
-        return head;
-
-    Node *slow = head;
-    Node *fast = head->next;
-
-    while (fast && fast->next)
-    {
-        slow = slow->next;
-        fast = fast->next->next;
-    }
-
-    Node *newHead = slow->next;
-    slow->next = NULL;
-
-    return merge(mergeSort(head), mergeSort(newHead));
-}
+};
