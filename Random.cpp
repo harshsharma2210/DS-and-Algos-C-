@@ -1,34 +1,17 @@
-class Solution
-{
-public:
-    int findMaxLen(string s)
-    {
-        // code here
-        int count = 0;
-        stack<int> st;
-        bool flag = true;
-        for (int i = 0; i < s.length(); i++)
-        {
-            char ch = s[i];
-            switch (ch)
-            {
-            case '(':
-                st.push('(');
-                break;
-            case ')':
-                if (st.top() == ')')
-                {
-                    count += 2;
-                }
-                else
-                {
-                    flag = false;
-                    break;
-                }
-            }
-            if (!flag)
-                break;
-        }
-        return count;
-    }
-};
+int minimumNumberOfSwaps(string S){
+int ans=0,opening=0,close=0;
+for(int i=0;i<s.length();i++){ if(s[i]="='['){" ans+="close;" if(close="">0)
+close--;
+else
+opening++;
+}
+if(S[i]==']'){
+if(opening>0)
+opening--;
+else
+close++;
+}
+
+}
+return ans;
+}
