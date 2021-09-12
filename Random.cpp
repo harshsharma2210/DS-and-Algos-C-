@@ -1,17 +1,14 @@
-int minimumNumberOfSwaps(string S){
-int ans=0,opening=0,close=0;
-for(int i=0;i<s.length();i++){ if(s[i]="='['){" ans+="close;" if(close="">0)
-close--;
-else
-opening++;
-}
-if(S[i]==']'){
-if(opening>0)
-opening--;
-else
-close++;
-}
+vector<int> temp;
+for (auto i : v)
+    temp.insert(temp.end(), i.begin(), i.end());
+sort(temp.begin(), temp.end());
 
+int counter = 0;
+for (int i = 0; i < v.size(); i++)
+{
+    for (int j = 0; j < v[i].size(); j++)
+    {
+        v[i][j] = temp[counter++];
+    }
 }
-return ans;
-}
+return v;
