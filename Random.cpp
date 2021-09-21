@@ -1,35 +1,36 @@
-long long int dp[505];
-
 class Solution
 {
 public:
-    long long int solver(int ind, int k, vector<int> &arr, int pre)
+    int dp[]
+    bool isMatch(string s, string p)
     {
-        int n = arr.size();
-        if (ind == n)
-            return (-1 * pre);
-        if (dp[ind] != -1)
-            return dp[ind];
-        int prev = 0;
-        long long int ans = INT_MAX;
-        for (int i = ind; i < n; i++)
+        if (p.length() == 0)
         {
-            prev += arr[i];
-            if (prev > k)
-                break;
-            int x = ((k - prev) * (k - prev));
-            long long int temp = x + solver(i + 1, k, arr, x);
-            ans = min(ans, temp);
-            prev += 1;
+            return (s.length() == 0);
         }
-
-        return dp[ind] = ans;
+        vector<vector<int>> v(s.length() + 1, vector<int>(p.length() + 1, -1));
+        return helper(s, p, 0, 0, v);
     }
-
-    int solveWordWrap(vector<int> &nums, int k)
+    bool helper(string s, string p, int i, int j, vector<vector<int>> &v)
     {
+        if (j == p.length())
+            return (i == s.length());
+        if (v[i][j] < 0)
+        {
+            if (i == s.length())
+                v[i][j] = (p[j] == '*' && helper(s, p, i, j + 1, v));
+            else if (i < s.length() && (p[j] == s[i] || p[j] == '?'))
+            {
+                v[i][j] = helper(s, p, i + 1, j + 1, v);
+            }
 
-        memset(dp, -1, sizeof(dp));
-        return solver(0, k, nums, 0);
+            else if (p[j] == '*')
+            {
+                v[i][j] = (helper(s, p, i, j + 1, v) || helper(s, p, i + 1, j, v));
+            }
+            else
+                v[i][j] = false;
+        }
+        return v[i][j];
     }
 };
