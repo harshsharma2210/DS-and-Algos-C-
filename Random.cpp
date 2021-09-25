@@ -1,36 +1,50 @@
-class Solution
-{
-public:
-    int dp[]
-    bool isMatch(string s, string p)
-    {
-        if (p.length() == 0)
-        {
-            return (s.length() == 0);
-        }
-        vector<vector<int>> v(s.length() + 1, vector<int>(p.length() + 1, -1));
-        return helper(s, p, 0, 0, v);
-    }
-    bool helper(string s, string p, int i, int j, vector<vector<int>> &v)
-    {
-        if (j == p.length())
-            return (i == s.length());
-        if (v[i][j] < 0)
-        {
-            if (i == s.length())
-                v[i][j] = (p[j] == '*' && helper(s, p, i, j + 1, v));
-            else if (i < s.length() && (p[j] == s[i] || p[j] == '?'))
-            {
-                v[i][j] = helper(s, p, i + 1, j + 1, v);
-            }
+// { Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
 
-            else if (p[j] == '*')
-            {
-                v[i][j] = (helper(s, p, i, j + 1, v) || helper(s, p, i + 1, j, v));
-            }
-            else
-                v[i][j] = false;
-        }
-        return v[i][j];
+int ally(long long int n);
+
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        long long int n;
+        cin >> n;
+        cout << ally(n) << endl;
     }
-};
+    return 0;
+} // } Driver Code Ends
+
+int findSmallestPermutation(string &s)
+{
+    int len = s.length();
+
+    // sort the string
+    sort(s.begin(), s.end());
+
+    // check for leading zero in string
+    // if there are any leading zeroes,
+    // swap the first zero with first non-zero number
+    int i = 0;
+    while (s[i] == '0')
+        i++;
+
+    swap(s[0], s[i]);
+    int a = stoi(s);
+    return (a);
+}
+int ally(long long int n)
+{
+    // code here
+    for (long long int i = 1; i <= n; i++)
+    {
+        string a=to_string(i);
+        if (i != findSmallestPermutation(a))
+        {
+            return i;
+        }
+    }
+    return -1;
+}
