@@ -1,50 +1,54 @@
-// { Driver Code Starts
-#include <bits/stdc++.h>
-using namespace std;
-
-int ally(long long int n);
-
-int main()
+int trigPin = 9;
+int echoPin=10;
+int led = 7;
+void setup()
 {
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        long long int n;
-        cin >> n;
-        cout << ally(n) << endl;
-    }
-    return 0;
-} // } Driver Code Ends
-
-int findSmallestPermutation(string &s)
-{
-    int len = s.length();
-
-    // sort the string
-    sort(s.begin(), s.end());
-
-    // check for leading zero in string
-    // if there are any leading zeroes,
-    // swap the first zero with first non-zero number
-    int i = 0;
-    while (s[i] == '0')
-        i++;
-
-    swap(s[0], s[i]);
-    int a = stoi(s);
-    return (a);
+    Serial.begin(9600);
+    pinMode(led, OUTPUT);
+    pinMode(trigPin, OUTPUT);
+    inMode(echoPin, INPUT). // put your setup code here,
 }
-int ally(long long int n)
+
+void loop()
 {
-    // code here
-    for (long long int i = 1; i <= n; i++)
-    {
-        string a=to_string(i);
-        if (i != findSmallestPermutation(a))
-        {
-            return i;
-        }
-    }
-    return -1;
-}
+
+    long duration, distance;
+
+    digitalWrite(trigPin, HIGH);
+    delayMicroseconds(1000);
+
+    digitalWrite(trigPin, LOW);
+
+    duration - pulse In(echops.HIGH);
+
+    distance(duration / 2) / 29 - 1;
+
+    Serial.print(distance);
+
+    Serial.println("CM") =        delay(10);
+
+    if ((distance <= 10))
+
+        digitalWrite(led, HIGH);
+
+    else
+
+        if (distance > 10)
+
+        digitalWrite(led, LOW);
+
+    to run
+
+        once :
+
+        = ppt - dsingh...
+
+              sketch_oct09a |
+          Ardui...
+
+          09
+
+          VELC ACTIVITY(1)(1)
+              .p...
+
+          Remarks
