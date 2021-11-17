@@ -1,73 +1,48 @@
-// { Driver Code Starts
-#include <bits/stdc++.h>
-using namespace std;
-
-// } Driver Code Ends
-class Solution
+void alternatingSplitList(struct Node *head)
 {
-public:
-    // Complete this function
-    // Function to sort the array according to frequency of elements.
-    static struct compare
+    Node *aTail;
+    Node *bTail;
+
+    int pos = 1;
+
+    Node *curr = head;
+    while (curr != NULL)
     {
-        bool operator()(pair<int, int> &a, pair<int, int> &b)
+        if (pos % 2 == 1)
         {
-            if (a.first == b.first)
-                return a.second < b.second;
-            return a.first > a.first;
+            if (a == NULL)
+            {
+                a = aTail = curr;
+            }
+            else
+            {
+                aTail->next = curr;
+                aTail = curr;
+            }
         }
-    } vector<int> sortByFreq(int arr[], int n)
-    {
-        // Your code here
-        priority_queue<pair<int, int>, vector<pair<int, int>>, compare> pq;
-        unordered_map<int, int> mp;
-        for (int i = 0; i < n; i++)
+        else
         {
-            mp[arr[i]]++;
+            if (b == NULL)
+            {
+                b = bTail = curr;
+            }
+            else
+            {
+                bTail->next = curr;
+                bTail = curr;
+            }
         }
-        for (auto i : mp)
-        {
-            pq.push({i.second, i.first});
-        }
-        vector<int> ans;
-        for (auto i : pq)
-        {
-            for (int i = 0; i < pq.first; i++)
-                ans.push_back(pq.second);
-        }
-        return ans;
-    }
-};
 
-// { Driver Code Starts.
-
-int main()
-{
-
-    int t;
-    cin >> t;
-
-    while (t--)
-    {
-
-        int n;
-        cin >> n;
-
-        int a[n + 1];
-
-        for (int i = 0; i < n; i++)
-        {
-            cin >> a[i];
-        }
-        Solution obj;
-        vector<int> v;
-        v = obj.sortByFreq(a, n);
-        for (int i : v)
-            cout << i << " ";
-        cout << endl;
+        pos++;
+        curr = curr->next;
     }
 
-    return 0;
+    if (a != NULL)
+    {
+        aTail->next = NULL;
+    }
+    if (b != NULL)
+    {
+        bTail->next = NULL;
+    }
 }
-
-// } Driver Code Ends
