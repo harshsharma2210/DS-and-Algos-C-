@@ -1,46 +1,174 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution
-{
-public:
-    vector<vector<int>> zigzagLevelOrder(TreeNode *root)
-    {
-        bool flag = true;
-        dequeue<TreeNode *> q;
-        q.push_back(root);
-        vector<vector<int>> ans;
-        while (!q.empty())
-        {
-            vector<int> v;
-            int size = q.size();
-            for (int i = 0; i < size; i++)
-            {
+#include <bits/stdc++.h>
+using namespace std;
+#define MAX_HEIGHT 100000
 
-                if (flag)
-                {
-                    auto a = q.back();
-                    if (a->left)
-                    {
-                        a.push_front(a->)
-                    }
-                    if (a->right)
-                    {
-                    }
-                }
-                else
-                {
-                }
-            }
-            flag = !flag;
-        }
-    }
+// Tree Node
+struct Node
+{
+    int data;
+    Node* left;
+    Node* right;
 };
+
+// Utility function to create a new Tree Node
+Node* newNode(int val)
+{
+    Node* temp = new Node;
+    temp->data = val;
+    temp->left = NULL;
+    temp->right = NULL;
+
+    return temp;
+}
+
+
+// Function to Build Tree
+Node* buildTree(string str)
+{
+    // Corner Case
+    if(str.length() == 0 || str[0] == 'N')
+        return NULL;
+
+    // Creating vector of strings from input
+    // string after spliting by space
+    vector<string> ip;
+
+    istringstream iss(str);
+    for(string str; iss >> str; )
+        ip.push_back(str);
+
+    // Create the root of the tree
+    Node* root = newNode(stoi(ip[0]));
+
+    // Push the root to the queue
+    queue<Node*> queue;
+    queue.push(root);
+
+    // Starting from the second element
+    int i = 1;
+    while(!queue.empty() && i < ip.size()) {
+
+        // Get and remove the front of the queue
+        Node* currNode = queue.front();
+        queue.pop();
+
+        // Get the current node's value from the string
+        string currVal = ip[i];
+
+        // If the left child is not null
+        if(currVal != "N") {
+
+            // Create the left child for the current node
+            currNode->left = newNode(stoi(currVal));
+
+            // Push it to the queue
+            queue.push(currNode->left);
+        }
+
+        // For the right child
+        i++;
+        if(i >= ip.size())
+            break;
+        currVal = ip[i];
+
+        // If the right child is not null
+        if(currVal != "N") {
+
+            // Create the right child for the current node
+            currNode->right = newNode(stoi(currVal));
+
+            // Push it to the queue
+            queue.push(currNode->right);
+        }
+        i++;
+    }
+
+    return root;
+}
+
+
+
+
+
+
+
+
+
+ // } Driver Code Ends
+/* A binary tree Node
+struct Node
+{
+    int data;
+    Node* left, * right;
+}; */
+
+class Solution {
+public:
+    void lb(Node *root, vector<int> &v)
+{
+    if (root == NULL)
+        return;
+    if (root->left != NULL || root->right != NULL)
+        v.push_back(root->data);
+    if (root->left != NULL)
+        lb(root->left, v);
+    else if (root->right != NULL)
+        lb(root->right, v);
+}
+void rb(Node *root, vector<int> &v)
+{
+    if (root == NULL)
+        return;
+    if (root->right != NULL)
+        rb(root->right, v);
+    else if (root->left != NULL)
+        rb(root->left, v);
+    if (root->left != NULL || root->right != NULL)
+        v.push_back(root->data);
+}
+void leafNode(Node *root, vector<int> &v)
+{
+    if (root == nullptr)
+        return;
+    if (root->left == nullptr && root->right == nullptr)
+        v.push_back(root->data);
+    leafNode(root->left, v);
+    leafNode(root->right, v);
+}
+vector<int> printBoundary(Node *root)
+{
+    //Your code here
+    vector<int> v;
+    if (!root)
+        return v;
+    v.push_back(root->data);
+    if (root->left == NULL && root->right == NULL)
+        return v;
+    lb(root->left, v);
+    leafNode(root, v);
+    rb(root->right, v);
+    return v;
+}
+};
+
+// { Driver Code Starts.
+
+/* Driver program to test size function*/
+
+int main() {
+    int t;
+    string tc;
+    getline(cin, tc);
+    t=stoi(tc);
+    while(t--)
+    {
+        string s ,ch;
+        getline(cin, s);
+        Node* root = buildTree(s);
+        Solution ob;
+        vector <int> res = ob.printBoundary(root);
+        for (int i : res) cout << i << " ";
+        cout << endl;
+    }
+    return 0;
+}  // } Driver Code Ends
