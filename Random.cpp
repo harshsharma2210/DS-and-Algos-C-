@@ -81,7 +81,7 @@ Node* buildTree(string str)
             queue.push(currNode->right);
         }
         i++;
-    }
+    }a
 
     return root;
 }
