@@ -7,4 +7,4 @@ int main()
         if(arr[i]<)
     }
 
-}ad 
+}
