@@ -1,45 +1,28 @@
-Node *deleteNode(Node *root, int X)
+class Solution
 {
-    if (root == NULL)
-        return NULL;
-    else if (X < root->data)
-    {
-        root->left = deleteNode(root->left, X);
-        return root;
-    }
-    else if (root->data == X)
-    {
-        if (root->left == NULL && root->right == NULL)
-        {
-            delete root;
-            return NULL;
-        }
-        if (root->left != NULL && root->right == NULL)
-        {
-            Node *temp f= root->left;
-            delete root;
-            return temp;
-        }
-        if (root->left == NULL && root->right != NULL)
-        {
-            Node *temp = root->right;
-            delete root;
-            return temp;
-        }
+public:
+    int wordBreak(string A, vector<string> &B){
 
-        Node *rep = root->right;
-        while (rep->left != NULL)
-        {
-            rep = rep->left;
-        }
-        root->data = rep->data;
-        root->right = deleteNode(root->right, rep->data);
-        return root;
-    }
+        bool recursion(string a, vector<string> b, int n, int m){
+            if (n == 0) return true;
+    if (m == 0)
+        return false;
+    if (a == b[m - 1])
+        return true;
+    if (a[n - 1] == a[m - 1])
+        return recursion(a.substr(0, n - 1), b, n - 1, m - 1) || recursion(a, b, n, m - 1);
     else
-    {
-
-        root->right = deleteNode(root->right, X);
-        return root;
-    }
+        return recursion(a, b, n, m - 1) || recursion(a, b, n - 1, m);
 }
+
+int
+wordBreak(string A, vector<string> &B)
+{
+    // code here
+    // reverse(A.begin(),A.end());
+    if (recursion(A, B, A.size(), B.size()))
+        return 1;
+    return 0;
+}
+}
+;
